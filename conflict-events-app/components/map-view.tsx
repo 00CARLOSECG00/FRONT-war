@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Layers, RotateCcw, Loader2 } from "lucide-react"
 import type { ConflictEvent, HeatCell } from "@/lib/types"
-import { formatDate, formatDeaths } from "@/lib/utils/numbers"
+import { formatDate } from "@/lib/utils/date"
+import { formatDeaths } from "@/lib/utils/numbers"
 
 interface MapViewProps {
   events: ConflictEvent[]
@@ -195,9 +196,9 @@ export function MapView({ events, heatData, loading, error }: MapViewProps) {
             </div>
             
             <div class="mt-3 pt-2 border-t">
-              <Link href={\`/event/${event.id}\`} className="text-blue-600 hover:text-blue-800 text-xs font-medium">
+              <a href={\`/event/${event.id}\`} className="text-blue-600 hover:text-blue-800 text-xs font-medium">
                 View Details →
-              </Link>
+              </a>
             </div>
           </div>
         `

@@ -14,6 +14,8 @@ import {
   BarChart3,
   ExternalLink,
   ArrowLeft,
+  Zap,
+  Cloud,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -55,7 +57,8 @@ export default function AboutPage() {
             <p className="text-muted-foreground">
               The War Events Observatory provides comprehensive, data-driven insights into global armed conflicts. Our
               platform serves researchers, policymakers, journalists, and humanitarian organizations by offering
-              transparent access to verified conflict data with sophisticated analytical tools.
+              transparent access to verified conflict data with sophisticated analytical tools powered by BigQuery and
+              Power BI.
             </p>
 
             <div className="grid md:grid-cols-3 gap-4">
@@ -182,18 +185,29 @@ export default function AboutPage() {
               <BarChart3 className="h-5 w-5" />
               Technical Architecture
             </CardTitle>
-            <CardDescription>How our platform processes and serves conflict data</CardDescription>
+            <CardDescription>
+              How our platform processes and serves conflict data using modern cloud technologies
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Data Storage</h3>
+                <h3 className="text-lg font-semibold">Data Storage & Analytics</h3>
                 <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Cloud className="h-5 w-5 mt-0.5 text-primary" />
+                    <div>
+                      <div className="font-medium">BigQuery</div>
+                      <div className="text-sm text-muted-foreground">
+                        Primary data warehouse for fast analytical queries
+                      </div>
+                    </div>
+                  </div>
                   <div className="flex items-start gap-3">
                     <Database className="h-5 w-5 mt-0.5 text-primary" />
                     <div>
                       <div className="font-medium">PostgreSQL</div>
-                      <div className="text-sm text-muted-foreground">Primary event storage and relationships</div>
+                      <div className="text-sm text-muted-foreground">Operational database for real-time map data</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -203,25 +217,37 @@ export default function AboutPage() {
                       <div className="text-sm text-muted-foreground">Geospatial analysis and heat mapping</div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <BarChart3 className="h-5 w-5 mt-0.5 text-primary" />
-                    <div>
-                      <div className="font-medium">ClickHouse/DuckDB</div>
-                      <div className="text-sm text-muted-foreground">Fast analytical queries and time series</div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">API Endpoints</h3>
-                <div className="space-y-2 text-sm font-mono">
-                  <div className="p-2 bg-muted rounded">GET /api/events</div>
-                  <div className="p-2 bg-muted rounded">GET /api/events/:id</div>
-                  <div className="p-2 bg-muted rounded">GET /api/lookups</div>
-                  <div className="p-2 bg-muted rounded">GET /api/stats/series</div>
-                  <div className="p-2 bg-muted rounded">GET /api/stats/by-region</div>
-                  <div className="p-2 bg-muted rounded">GET /api/stats/heat</div>
+                <h3 className="text-lg font-semibold">Visualization & BI</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <BarChart3 className="h-5 w-5 mt-0.5 text-primary" />
+                    <div>
+                      <div className="font-medium">Power BI</div>
+                      <div className="text-sm text-muted-foreground">Interactive dashboards and advanced analytics</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Zap className="h-5 w-5 mt-0.5 text-primary" />
+                    <div>
+                      <div className="font-medium">Real-time Sync</div>
+                      <div className="text-sm text-muted-foreground">
+                        Automated data pipeline from BigQuery to Power BI
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Globe className="h-5 w-5 mt-0.5 text-primary" />
+                    <div>
+                      <div className="font-medium">Embedded Reports</div>
+                      <div className="text-sm text-muted-foreground">
+                        Seamlessly integrated dashboards in web interface
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -229,24 +255,57 @@ export default function AboutPage() {
             <Separator />
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Performance Optimizations</h3>
+              <h3 className="text-lg font-semibold">Data Pipeline Architecture</h3>
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="text-center">
+                    <Database className="h-6 w-6 mx-auto mb-1 text-primary" />
+                    <div className="font-medium">Source Data</div>
+                    <div className="text-xs text-muted-foreground">Multiple conflict databases</div>
+                  </div>
+                  <div className="text-2xl text-muted-foreground">→</div>
+                  <div className="text-center">
+                    <Cloud className="h-6 w-6 mx-auto mb-1 text-primary" />
+                    <div className="font-medium">BigQuery</div>
+                    <div className="text-xs text-muted-foreground">Data warehouse & analytics</div>
+                  </div>
+                  <div className="text-2xl text-muted-foreground">→</div>
+                  <div className="text-center">
+                    <BarChart3 className="h-6 w-6 mx-auto mb-1 text-primary" />
+                    <div className="font-medium">Power BI</div>
+                    <div className="text-xs text-muted-foreground">Interactive dashboards</div>
+                  </div>
+                  <div className="text-2xl text-muted-foreground">→</div>
+                  <div className="text-center">
+                    <Globe className="h-6 w-6 mx-auto mb-1 text-primary" />
+                    <div className="font-medium">Web App</div>
+                    <div className="text-xs text-muted-foreground">User interface</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Performance & Cost Optimization</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <div className="font-medium">Frontend</div>
+                  <div className="font-medium">BigQuery Benefits</div>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Map clustering for large datasets</li>
-                    <li>• Virtual scrolling for tables</li>
-                    <li>• Debounced filter updates</li>
-                    <li>• Memoized chart components</li>
+                    <li>• Serverless, auto-scaling analytics</li>
+                    <li>• Columnar storage for fast queries</li>
+                    <li>• Pay-per-query cost model</li>
+                    <li>• Built-in machine learning capabilities</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <div className="font-medium">Backend</div>
+                  <div className="font-medium">Power BI Integration</div>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Indexed geographic queries</li>
-                    <li>• Columnar analytics engine</li>
-                    <li>• Geohash-based heat mapping</li>
-                    <li>• Cached lookup tables</li>
+                    <li>• Direct BigQuery connector</li>
+                    <li>• Cached dashboard performance</li>
+                    <li>• Scheduled data refresh</li>
+                    <li>• Advanced visualization options</li>
                   </ul>
                 </div>
               </div>
@@ -359,7 +418,8 @@ export default function AboutPage() {
                 <h3 className="text-lg font-semibold">For Researchers</h3>
                 <p className="text-sm text-muted-foreground">
                   If you're using this data for academic research, please ensure proper citation and consider the
-                  ethical implications of your work.
+                  ethical implications of your work. Our Power BI dashboards provide advanced analytical capabilities
+                  for in-depth research.
                 </p>
                 <div className="space-y-2">
                   <Button variant="outline" size="sm" className="gap-2 bg-transparent" asChild>
@@ -375,7 +435,7 @@ export default function AboutPage() {
                 <h3 className="text-lg font-semibold">For Organizations</h3>
                 <p className="text-sm text-muted-foreground">
                   Humanitarian organizations and policy institutions can access additional resources and support for
-                  using conflict data responsibly.
+                  using conflict data responsibly. Custom Power BI reports available for institutional partners.
                 </p>
                 <div className="space-y-2">
                   <Button variant="outline" size="sm" className="gap-2 bg-transparent" asChild>
@@ -393,8 +453,8 @@ export default function AboutPage() {
             <div className="text-center space-y-4">
               <h3 className="text-lg font-semibold">Explore the Data</h3>
               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-                Ready to start exploring global conflict data? Use our interactive tools to analyze patterns, trends,
-                and regional variations in armed conflicts worldwide.
+                Ready to start exploring global conflict data? Use our interactive tools powered by BigQuery and Power
+                BI to analyze patterns, trends, and regional variations in armed conflicts worldwide.
               </p>
               <Link href="/explore">
                 <Button className="gap-2">

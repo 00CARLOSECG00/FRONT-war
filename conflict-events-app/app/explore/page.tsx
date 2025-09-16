@@ -7,9 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RotateCcw, Filter } from "lucide-react"
 import { FiltersPanel } from "@/components/filters-panel"
 import { MapView } from "@/components/map-view"
-import { TimelineChart } from "@/components/timeline-chart"
+import { BigQueryDashboard } from "@/components/bigquery-dashboard"
 import { EventsTable } from "@/components/events-table"
-import { RegionsView } from "@/components/regions-view"
 import type { EventFilters, ConflictEvent, HeatCell } from "@/lib/types"
 import { getEvents, getHeat } from "@/lib/api"
 import { getDefaultDateRange } from "@/lib/utils/date"
@@ -116,7 +115,7 @@ function ExplorePageContent() {
         <div className="flex items-center justify-between p-4">
           <div>
             <h1 className="text-2xl font-bold">Explore Conflict Events</h1>
-            <p className="text-sm text-muted-foreground">Interactive analysis of global armed conflict data</p>
+            <p className="text-sm text-muted-foreground">Interactive analysis powered by BigQuery and Power BI</p>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => setShowFilters(!showFilters)} className="gap-2">
@@ -153,14 +152,14 @@ function ExplorePageContent() {
 
           {/* Data Visualization Tabs */}
           <div className="h-1/2 border-t">
-            <Tabs defaultValue="timeline" className="h-full flex flex-col">
+            <Tabs defaultValue="analytics" className="h-full flex flex-col">
               <div className="border-b bg-muted/20">
                 <TabsList className="h-12 w-full justify-start rounded-none bg-transparent p-0">
                   <TabsTrigger
-                    value="timeline"
+                    value="analytics"
                     className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
                   >
-                    Timeline
+                    Analytics Dashboard
                   </TabsTrigger>
                   <TabsTrigger
                     value="table"
@@ -168,26 +167,16 @@ function ExplorePageContent() {
                   >
                     Events Table
                   </TabsTrigger>
-                  <TabsTrigger
-                    value="regions"
-                    className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
-                  >
-                    Regions
-                  </TabsTrigger>
                 </TabsList>
               </div>
 
               <div className="flex-1 overflow-hidden">
-                <TabsContent value="timeline" className="h-full m-0 p-4">
-                  <TimelineChart filters={filters} />
+                <TabsContent value="analytics" className="h-full m-0 p-4">
+                  <BigQueryDashboard filters={filters} />
                 </TabsContent>
 
                 <TabsContent value="table" className="h-full m-0 p-4">
                   <EventsTable filters={filters} />
-                </TabsContent>
-
-                <TabsContent value="regions" className="h-full m-0 p-4">
-                  <RegionsView filters={filters} />
                 </TabsContent>
               </div>
             </Tabs>
